@@ -5,27 +5,27 @@ from django.core.validators import RegexValidator
 
 class Mailing(models.Model):
     start_data = models.DateTimeField(
-        varbose_name="Начало рассылки"
+        verbose_name="Начало рассылки"
     )
     finish_data = models.DateTimeField(
-        varbose_name="Окончание рассылки"
+        verbose_name="Окончание рассылки"
     )
     start_time = models.TimeField(
-        varbose_name="Время начала рассылки"
+        verbose_name="Время начала рассылки"
     )
     finish_time = models.TimeField(
-        varbose_name="Время начала рассылки"
+        verbose_name="Время начала рассылки"
     )
     text = models.TimeField(
-        varbose_name="Текст сообщения",
+        verbose_name="Текст сообщения",
         max_length=150
     )
     tag = models.CharField(
-        varbose_name="Фильтр по тегу",
+        verbose_name="Фильтр по тегу",
         max_length=100, blank=True
     )
     operator_code = models.CharField(
-        varbose_name="Фильтр по коду оператора",
+        verbose_name="Фильтр по коду оператора",
         max_length=100,
         blank=True
     )
@@ -52,20 +52,20 @@ class Client(models.Model):
         message="Номер клиента должен быть в формате 7XXXXXXXXXX (X - цифра от 0 до 9)",
     )
     phone = models.PositiveIntegerField(
-        varbose_name="Номер мобильного телефона",
+        verbose_name="Номер мобильного телефона",
         validators=[phone_valid]
     )
     code = models.PositiveIntegerField(
-        varbose_name="Код оператора"
+        verbose_name="Код оператора"
     )
     tag = models.CharField(
-        varbose_name="Фильтр по тегу",
+        verbose_name="Фильтр по тегу",
         max_length=100,
         blank=True
     )
     time_zone = models.CharField(
         verbose_name="Часовой пояс",
-         max_length=10
+        max_length=10
          )
     
     def __str__(self):
@@ -87,7 +87,7 @@ class Message(models.Model):
         (FAILED, "Failed"),
     ]
     data = models.DateTimeField(
-        varbose_name="Дата сообщения",
+        verbose_name="Дата сообщения",
         auto_now_add=True
     )
     status = models.CharField(
