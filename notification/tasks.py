@@ -1,29 +1,17 @@
-import requests
 import os
-import time
+import requests
 from dotenv import load_dotenv
+import time
 
 from .models import Mailing, Client, Message
 
 load_dotenv()
+
 URL = os.getenv("URL")
 TOKEN = os.getenv("TOKEN")
 
 
-def send_message(ids,
-                 url=URL,
-                 token=TOKEN):
-    """
-
-        https://probe.fbrq.cloud/v1/send/{msgId}
-        содержание "BODY"
-        {
-          "id": 0,
-          "phone": 0,
-          "text": "string"
-        }
-    """
-
+def send_message(ids, url=URL, token=TOKEN):
     header = {
         'Authorization': f'Bearer {token}',
         'Content-Type': 'application/json'}
@@ -44,15 +32,20 @@ def send_message(ids,
                 "phone": client.phone,
                 "text": mailing.text
             }
+            
             count = 0
+            
             try:
                 response = requests.post(
                     url=url + str(message.id),
                     headers=header,
                     json=data)
+                
                 print(response.status_code)
+                
                 while response.status_code != 200 and count < 200:
                     time.sleep(2)
                     count += 1
+                    
             except ConnectionError:
                 return f'Connection error, contact your network administrator'

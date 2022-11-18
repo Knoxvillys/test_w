@@ -9,7 +9,7 @@ class ClientSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Client
-        exclude = ("phone_valid", )
+        fields = ('phone', 'code', 'tag', 'time_zone', 'id',)
 
 
 class MessageSerializer(serializers.ModelSerializer):
